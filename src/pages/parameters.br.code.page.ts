@@ -37,6 +37,16 @@ export class ParametersBranchCodePage {
   get DeleteButton():Locator {
     return this.page.getByRole('button', {name: 'Delete',exact:true }).first();
   }
+  get ContinueDeleteButton():Locator{
+    return this.page.getByRole('button',{name:'Continue',exact:true}).first();
+  }
+  get SuccessDeleteButton():Locator{
+    return this.page.getByRole('button',{name: 'Continue', exact:true});
+  }
+
+  get AddNewButton(): Locator{
+    return this.page.getByRole('button',{name: 'Add New', exact:true});
+  }
 
   async openParametersMenu(): Promise<void> {
     await this.parametersMenu.waitFor({ state: "visible", timeout: 30000 });
@@ -108,12 +118,26 @@ export class ParametersBranchCodePage {
     await expect(this.page.getByText("Edit Branch Details")).toBeVisible();
   }
 
-  async deleteOption(): Promise<void> {
+  /*async addNew():Promise<void>{
+    await this.AddNewButton.waitFor({state: "visible", timeout:30000});
+    await this.AddNewButton.click();
+
+    await expect(this.page.getByText("Add Branch Details")).toBeVisible();
+  }*/
+
+  /*async deleteOption(): Promise<void> {
     await this.DeleteButton.waitFor({ state: "visible", timeout: 30000 });
     await this.DeleteButton.click();
 
     await expect(this.page.getByText("Warning")).toBeVisible();
-  }
+    await this.ContinueDeleteButton.waitFor({state: "visible", timeout: 30000});
+    await this.ContinueDeleteButton.click();
+
+    await this.SuccessDeleteButton.waitFor({state: 'visible', timeout:30000});
+    await this.SuccessDeleteButton.click();
+  }*/
+
+
 
 
 

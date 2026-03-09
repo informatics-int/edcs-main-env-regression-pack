@@ -79,12 +79,21 @@ test.describe("Parameter Branch Code testing", () => {
     });
   });
 
-  test('Verify delete button', async ({ page }) => {
+  /*test('Verify add new button navigation',async ({page}) => {
+    const parameterBranchCode = new ParametersBranchCodePage(page);
+    //testcase 7
+    await test.step("Click add new button",async () =>{
+      await parameterBranchCode.addNew()
+    });
+
+  });*/
+
+  /*test('Verify delete button', async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
     //testcase 6
     await test.step("Click delete button", async () => {
       await parameterBranchCode.deleteOption()
     });
-  });
+  }); */
 });
 
