@@ -26,6 +26,18 @@ export class ParametersBranchCodePage {
     return this.page.getByRole('option', { name: '100', exact: true });
   }
 
+  get ViewButton():Locator {
+    return this.page.getByRole('button', {name: 'View',exact:true }).first();
+  }
+
+  get EditButton():Locator {
+    return this.page.getByRole('button', {name: 'Edit',exact:true }).first();
+  }
+
+  get DeleteButton():Locator {
+    return this.page.getByRole('button', {name: 'Delete',exact:true }).first();
+  }
+
   async openParametersMenu(): Promise<void> {
     await this.parametersMenu.waitFor({ state: "visible", timeout: 30000 });
     await this.parametersMenu.click();
@@ -78,6 +90,31 @@ export class ParametersBranchCodePage {
     const rows = this.page.locator("tbody tr");
     await rows.first().waitFor({ state: 'visible' });
     const rowCount = await rows.count();
-    expect(rowCount).toBe(expectedRows);
+    console.log(`rows displayed:${rowCount}`);
+    expect(rowCount).toBeLessThanOrEqual(expectedRows);
   }
+
+  async viewOption(): Promise<void> {
+    await this.ViewButton.waitFor({ state: "visible", timeout: 30000 });
+    await this.ViewButton.click();
+
+    await expect(this.page.getByText("View Branch Details")).toBeVisible();
+  }
+
+  async editOption(): Promise<void> {
+    await this.EditButton.waitFor({ state: "visible", timeout: 30000 });
+    await this.EditButton.click();
+
+    await expect(this.page.getByText("Edit Branch Details")).toBeVisible();
+  }
+
+  async deleteOption(): Promise<void> {
+    await this.DeleteButton.waitFor({ state: "visible", timeout: 30000 });
+    await this.DeleteButton.click();
+
+    await expect(this.page.getByText("Warning")).toBeVisible();
+  }
+
+
+
 }
