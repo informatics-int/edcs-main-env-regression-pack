@@ -5,8 +5,8 @@ import { credentials } from "../resources/credentials";
 
 test.describe("Parameter Branch Code testing", () => {
   let loginPage: LoginPage;
-
   test.beforeEach(async ({ page }) => {
+
     loginPage = new LoginPage(page);
     const parameterBranchCode = new ParametersBranchCodePage(page);
 
@@ -17,26 +17,30 @@ test.describe("Parameter Branch Code testing", () => {
     await page.waitForSelector('div:has-text("Parameters")',
       { state: "visible", timeout: 30000 });
 
-    //testcase 1
     await parameterBranchCode.openParametersMenu();
     await parameterBranchCode.navigateToBranchCode();
-    await parameterBranchCode.verifyNavigationToBranchCode();
 
     // wait for table rows
     await page.locator("tbody tr").first().waitFor({ state: "visible" });
   });
 
-  test('Branch code grid', async ({ page }) => {
+  test('Branch code page navigation', { tag: ['@testcase1', '@positive'] }, async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
-    //testcase 2
+
+    await parameterBranchCode.openParametersMenu();
+    await parameterBranchCode.navigateToBranchCode();
+    await parameterBranchCode.verifyNavigationToBranchCode();
+  });
+
+  test('Branch code grid', { tag: ['@testcase2', '@positive'] }, async ({ page }) => {
+    const parameterBranchCode = new ParametersBranchCodePage(page);
     await test.step("Verify branch code grid columns", async () => {
       await parameterBranchCode.verifyBranchCodeGridColumns();
     });
   });
 
-  test('Verify 10 rows per page', async ({ page }) => {
+  test('Verify 10 rows per page', { tag: ['@testcase3', '@positive'] }, async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
-    //testcase 3
     //10 rows
     await test.step("Click on 10 rows per page dropdown", async () => {
       await parameterBranchCode.selectRowsPerPage("10");
@@ -44,7 +48,7 @@ test.describe("Parameter Branch Code testing", () => {
     await parameterBranchCode.verifyRowsCount(10);
   });
 
-  test('Verify 25 rows per page', async ({ page }) => {
+  test('Verify 25 rows per page', { tag: ['@testcase3', '@positive'] },async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
     //25 rows
     await test.step("Click on 25 rows per page dropdown", async () => {
@@ -53,7 +57,7 @@ test.describe("Parameter Branch Code testing", () => {
     await parameterBranchCode.verifyRowsCount(25);
   });
 
-  test('Verify 100 rows per page', async ({ page }) => {
+  test('Verify 100 rows per page', { tag: ['@testcase3', '@positive'] }, async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
     //100 rows
     await test.step("Click on 100 rows per page dropdown", async () => {
@@ -63,32 +67,29 @@ test.describe("Parameter Branch Code testing", () => {
 
   });
 
-  test('Verify view button', async ({ page }) => {
+  test('Verify view button', { tag: ['@testcase4', '@positive'] }, async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
-    //testcase 4
     await test.step("Click view button", async () => {
       await parameterBranchCode.viewOption()
     });
   });
 
-  test('Verify edit button', async ({ page }) => {
+  test('Verify edit button', { tag: ['@testcase5', '@positive'] }, async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
-    //testcase 5
     await test.step("Click edit button", async () => {
       await parameterBranchCode.editOption()
     });
   });
 
-  /*test('Verify add new button navigation',async ({page}) => {
+  /*test('Verify add new button navigation', { tag: ['@testcase7', '@positive'] }, async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
-    //testcase 7
-    await test.step("Click add new button",async () =>{
+    await test.step("Click add new button", async () => {
       await parameterBranchCode.addNew()
     });
 
   });*/
 
-  /*test('Verify delete button', async ({ page }) => {
+  /*test('Verify delete button',{tag: ['@testcase6']}, async ({ page }) => {
     const parameterBranchCode = new ParametersBranchCodePage(page);
     //testcase 6
     await test.step("Click delete button", async () => {

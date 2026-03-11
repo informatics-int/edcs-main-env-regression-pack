@@ -26,26 +26,26 @@ export class ParametersBranchCodePage {
     return this.page.getByRole('option', { name: '100', exact: true });
   }
 
-  get ViewButton():Locator {
-    return this.page.getByRole('button', {name: 'View',exact:true }).first();
+  get ViewButton(): Locator {
+    return this.page.getByRole('button', { name: 'View', exact: true }).first();
   }
 
-  get EditButton():Locator {
-    return this.page.getByRole('button', {name: 'Edit',exact:true }).first();
+  get EditButton(): Locator {
+    return this.page.getByRole('button', { name: 'Edit', exact: true }).first();
   }
 
-  get DeleteButton():Locator {
-    return this.page.getByRole('button', {name: 'Delete',exact:true }).first();
+  get DeleteButton(): Locator {
+    return this.page.getByRole('button', { name: 'Delete', exact: true }).first();
   }
-  get ContinueDeleteButton():Locator{
-    return this.page.getByRole('button',{name:'Continue',exact:true}).first();
+  get ContinueDeleteButton(): Locator {
+    return this.page.getByRole('button', { name: 'Continue', exact: true }).first();
   }
-  get SuccessDeleteButton():Locator{
-    return this.page.getByRole('button',{name: 'Continue', exact:true});
+  get SuccessDeleteButton(): Locator {
+    return this.page.getByRole('button', { name: 'Continue', exact: true });
   }
 
-  get AddNewButton(): Locator{
-    return this.page.getByRole('button',{name: 'Add New', exact:true});
+  get AddNewButton(): Locator {
+    return this.page.getByRole('button', { name: 'Add New', exact: true });
   }
 
   async openParametersMenu(): Promise<void> {
@@ -125,6 +125,8 @@ export class ParametersBranchCodePage {
     await expect(this.page.getByText("Add Branch Details")).toBeVisible();
   }*/
 
+
+
   /*async deleteOption(): Promise<void> {
     await this.DeleteButton.waitFor({ state: "visible", timeout: 30000 });
     await this.DeleteButton.click();
@@ -136,9 +138,5 @@ export class ParametersBranchCodePage {
     await this.SuccessDeleteButton.waitFor({state: 'visible', timeout:30000});
     await this.SuccessDeleteButton.click();
   }*/
-
-
-
-
 
 }
