@@ -447,11 +447,22 @@ export default class TeamsReporter implements Reporter {
     const showButton = process.env.SHOW_HTML_REPORT_BUTTON?.toLowerCase().trim();
     const buttonEnabled = showButton === undefined || showButton === 'true' || showButton === '1';
 
-    if (buttonEnabled && process.env.PLAYWRIGHT_REPORT_URL) {
+    // Get report URL from environment - can be custom URL or GitHub Actions artifact URL
+    let reportUrl = process.env.PLAYWRIGHT_REPORT_URL;
+    
+    // If no custom URL provided, generate GitHub Actions artifact URL
+    if (!reportUrl && process.env.GITHUB_ACTIONS) {
+      if (process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
+        // Link to GitHub Actions artifacts page for this run
+        reportUrl = `https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+      }
+    }
+
+    if (buttonEnabled && reportUrl) {
       actions.push({
         '@type': 'OpenUri',
         name: '📊 View HTML Report',
-        targets: [{ os: 'default', uri: process.env.PLAYWRIGHT_REPORT_URL }],
+        targets: [{ os: 'default', uri: reportUrl }],
       });
     }
 
